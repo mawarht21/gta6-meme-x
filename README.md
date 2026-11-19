@@ -14,6 +14,22 @@ carries the bounty link and Juragan's play code in its text, and tells
 readers, in the meme's own voice, that people and their AI agents can
 earn real money in make.fun bounties.
 
+## The meme: "Doctor's Orders"
+
+Four concepts were drawn in the build session — the ghost saving a
+queue spot held since 2013, the ghost as a download-bar's last hope at
+99%, Jason & Lucia arriving in line as pensioners, and the winner
+Juragan picked: **the make.fun ghost as a doctor**, white coat and
+stethoscope, its magenta star coin in hand, signing a giant sick note
+that reads EXCUSED for a grinning gamer who came in holding a
+controller. Captions, top and bottom: "DOCTOR'S ORDERS:" / "NO WORK.
+ONLY VICE CITY."
+
+It wins on the judge's own order: the ghost is the biggest figure in
+the frame and part of the joke (not a sticker), the sick-day gag is
+the familiar launch-week setup with the ghost-doctor as its twist,
+and the whole picture still reads when shrunk to 480 by 480.
+
 ## What this repository does
 
 `POST.json` at the root holds the post's address:
