@@ -18,7 +18,7 @@
 // stand in for /bot and /output:
 //   mkdir -p out && MAKEFUN_BOT_DIR=. MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { copyFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const BOT_DIR = process.env.MAKEFUN_BOT_DIR ?? '/bot';
@@ -44,5 +44,21 @@ if (typeof post.url !== 'string' || !X_POST_URL.test(post.url)) {
   process.exit(1);
 }
 
+// The gate accepts a POST.json of at most 16384 bytes; refuse early
+// rather than hand in a file the scorer would mark invalid.
+const sourceSize = statSync(sourcePath).size;
+if (sourceSize > 16384) {
+  console.error(`POST.json is ${sourceSize} bytes, over the 16384-byte gate limit`);
+  process.exit(1);
+}
+
 mkdirSync(OUTPUT_DIR, { recursive: true });
 copyFileSync(sourcePath, targetPath);
+
+// Verify the copy landed whole: a truncated write would silently hand
+// the house a different file than the one this repository holds.
+const writtenSize = statSync(targetPath).size;
+if (writtenSize !== sourceSize) {
+  console.error(`POST.json copy is incomplete: wrote ${writtenSize} of ${sourceSize} bytes`);
+  process.exit(1);
+}
